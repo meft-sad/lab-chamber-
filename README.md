@@ -20,10 +20,6 @@ Therefore, in order to measure the distance between the obstacle and the sensor 
 A signal of 10 µs is sent by setting the trigger pin high for this time interval. It is possible to decide which edge on the input capture pin is used to trigger a capture event: initially this set to the rising edge so that when the echo pin becomes high the value of the counter is saved in a variable and afterward it is set to the falling edge so that when the echo pin becomes low the second value of the counter is saved. 
 
 
-<img src="trig-echo.png"
-     alt="Trigger and Echo signals."
-     style="float: left; margin-right: 10px;" />
-
 
 By making the difference between those two values and divide by the clock frequency, which depends on the crystal inside Arduino and in this case is 16 MHz, it is possible to get the time in which the signal has travel.
 By multiplying for the speed of sound which at 20°C is roughly 343 m/s and dividing by two, since we need to take into account that the signal crosses twice the distance between the obstacle and the sensor, it is possible to get the distance:
