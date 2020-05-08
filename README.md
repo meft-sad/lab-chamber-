@@ -19,13 +19,30 @@ The HC-SR04 Ultrasonic sensor has 4 pins: Ground, VCC, Trig and Echo. The Ground
 Therefore, in order to measure the distance between the obstacle and the sensor it is necessary to calculate the time of travel of the signal, that means the time in which the echo stays high. To to do the Input Caputure mode of the Timer 1 of Arduino UNO has been used. It is a 16-bits timer which incorporate an input capture unit that can capture external events and give them a time-stamp indicating the time of occurrence. When a change of the logic level occurs on the input capture pin, which corresponds to Pin 8 or Arduino (PB0), the 16-bits value of the counter TCNT1 is written inot the ICR1 register. The echo pin is connected to the input capture pin, while the trigger pin can be connected to any I/O pin of Arduino.
 A signal of 10 µs is sent by setting the trigger pin high for this time interval. It is possible to decide which edge on the input capture pin is used to trigger a capture event: initially this set to the rising edge so that when the echo pin becomes high the value of the counter is saved in a variable and afterward it is set to the falling edge so that when the echo pin becomes low the second value of the counter is saved. 
 
-![Trigger and Echo signals](trig-echo.jpg)
 
 By making the difference between those two values and divide by the clock frequency, which depends on the crystal inside Arduino and in this case is 16 MHz, it is possible to get the time in which the signal has travel.
 By multiplying for the speed of sound which at 20°C is roughly 343 m/s and dividing by two, since we need to take into account that the signal crosses twice the distance between the obstacle and the sensor, it is possible to get the distance:
 
-distance = (time_interval* speed_sound)/2
+distance = (time_interval* speed_sound) / 2
 
 
 In end end when the distance is below a critical value an LED is turned on. 
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
+
+## Temperature
+### Sensor LM35
+To measure the temperature in the room the sensor LM35 is used.
+The LM35 sensor is a precision integrated-circuit temperature device with an output voltage linearly proportional to the Centigrade temperature. It can measure temperature from -55°C to 150°C and the voltage output increases 10mV per degree Celsius rise in temperature. It has 3 pins: one has to be connected to ground, one to the supply voltage that can be the 5 V provided by Arduino and the third needs to be connected to one analog input of Arduino Board. 
+It does not require any external calibration and it provides an accuracy of ±1/4°C at room temperature and ±3/4°C over a full -55°C to 150°C range. Since the device drwas onlu 60 µA fom the supply it has a very low self-heating.
+
+### Analog to Digital converter
+Arduino has an internal analog to digital converter with 10 bits of resolution. 
+
+### Calculation of temperature
+Once the value of the input pin connected to the sensor LM35 is read, the effective value of the output in mV can be calculated considering that the reference voltage used is 5V and that the resolution of the ADC is 10 bits:
+
+voltage [mV] = (5V * value * 1000 )/1024
+
+From this value the temperature can be calculated considering that the sensor is linear and the output voltage of the sensor increases of 10 mV for each degree Celsius, this means that we need to divide the voltage calculated per 10:
+
+temperature = voltage / 10
