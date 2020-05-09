@@ -1,4 +1,4 @@
-# lab-chamber-
+# Lab-chamber
 ## Final project of Data Acquisition Systems IST 
 
 ### Anna Toschi
@@ -15,8 +15,8 @@ Many times in the scientific laboratories there are some inflammable materials w
 ## Sensors:
 
 1) HC-SR04 ultrasonic sensor: https://www.electroschematics.com/wp-content/uploads/2013/07/HCSR04-datasheet-version-1.pdf
-   
-
+2) KY-013 temperature sensor: https://datasheetspdf.com/pdf-file/1402026/Joy-IT/KY-013/1
+3) KY-026 flame sensor: https://datasheet4u.com/datasheet-parts/KY-026-datasheet.php?id=1402037
 
 ## Distance
 
@@ -37,7 +37,7 @@ In end end when the distance is below a critical value an LED is turned on.
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
 ## Temperature
-### KY-013
+In order to measure the temperature of the room an NTC thermistor has been used.
 Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor.
 
 The operating voltage is 5V and it allows temperature measurements within the range of -55°C and 125°C with an accuracy of ±0.5°C.
@@ -60,8 +60,6 @@ A = 0.001129148
 B = 0.000234125
 C = 0.000000087674
 
-### Analog to Digital converter
-Arduino has an internal analog to digital converter with 10 bits of resolution. 
 
 ## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module.
