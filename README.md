@@ -57,3 +57,7 @@ C = 0.000000087674
 ### Analog to Digital converter
 Arduino has an internal analog to digital converter with 10 bits of resolution. 
 
+## Flame 
+Many times in the scientific laboratories there are some inflammable materials which can be very dangerous. It is very important that the laboratory is safe, for this reason a flame sensor will be used to detect the possible presence of a flames. 
+
+The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module.
