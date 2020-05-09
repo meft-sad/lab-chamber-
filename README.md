@@ -10,6 +10,12 @@ During an experiment it can be very important that the support on which the samp
 
 Sometimes it can also be very important that the temperature inside the laboratory is within a specific range because of the sample that is under analysis. For this reason a temperature sensor is used in order to control that the temperature is compatible with the requests. In case it is not, an LED will turn on.
 
+Many times in the scientific laboratories there are some inflammable materials which can be very dangerous. It is very important that the laboratory is safe, for this reason a flame sensor will be used to detect the possible presence of a flames. 
+
+## Sensors:
+
+1) HC-SR04 ultrasonic sensor: https://www.electroschematics.com/wp-content/uploads/2013/07/HCSR04-datasheet-version-1.pdf
+   
 
 
 ## Distance
@@ -57,7 +63,5 @@ C = 0.000000087674
 ### Analog to Digital converter
 Arduino has an internal analog to digital converter with 10 bits of resolution. 
 
-## Flame 
-Many times in the scientific laboratories there are some inflammable materials which can be very dangerous. It is very important that the laboratory is safe, for this reason a flame sensor will be used to detect the possible presence of a flames. 
-
+## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module.
