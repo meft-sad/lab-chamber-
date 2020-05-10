@@ -62,4 +62,4 @@ C = 0.000000087674
 
 
 ## Flame
-The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module.
+The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module. 
