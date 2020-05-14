@@ -37,6 +37,7 @@ In end end when the distance is below a critical value an LED is turned on.
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
 ## Temperature
+###Sensor 
 In order to measure the temperature of the room an NTC thermistor has been used.
 Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor.
 
@@ -60,6 +61,11 @@ A = 0.001129148
 B = 0.000234125
 C = 0.000000087674
 
+At room temperature the value of the voltage is between 2 and 3 V.
+### Look-up Table
+Since Arduino, for complicated operations like logarithms, is not very efficient, instead of calculating the temperature using the Steinhart–Hart equation, the temperature is calculated using look-up tables. In particular a finite number of values of the voltage are stored in an array and the corresponding values of temperature are calculated outside Arduino (in Matlab) and an array for those values of temperature is created. In order to find the other values of temperature a linear interpolation is performed. 
+In particular this introduces an error in the calculation of temperature. 
+This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximu value of the error introduced is 0.8587°C.
 
 ## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module. 
