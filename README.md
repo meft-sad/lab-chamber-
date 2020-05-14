@@ -37,7 +37,7 @@ In end end when the distance is below a critical value an LED is turned on.
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
 ## Temperature
-###Sensor 
+### Sensor 
 In order to measure the temperature of the room an NTC thermistor has been used.
 Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor.
 
