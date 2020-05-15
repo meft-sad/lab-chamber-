@@ -32,7 +32,9 @@ By multiplying for the speed of sound which at 20°C is roughly 343 m/s and divi
 
 distance = (time_interval* speed_sound) / 2
 
-
+It is important to consider that the speed of sound depends on temperature. It is possible to consider the linear model:
+speed_sound(T) = (331,45 + (0,62 * T)) m/s
+BY calculating the temperature it is possible to calculate the corresponding speed of sound and the corresponding distance.
 In end end when the distance is below a critical value an LED is turned on. 
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
@@ -57,9 +59,9 @@ This quantity is related to the temperature through the Steinhart–Hart equatio
 
 Where A, B and C are the Steinhart-Hart coefficients which vary depending on the type and model of thermistor and the temperature range of interest. In this case:
 
-A = 0.001129148
-B = 0.000234125
-C = 0.000000087674
+A = 0.001129148 K^(-1)
+B = 0.000234125 K^(-2)
+C = 0.000000087674 K^(-3)
 
 At room temperature the value of the voltage is between 2 and 3 V.
 ### Look-up Table
@@ -68,4 +70,9 @@ In particular this introduces an error in the calculation of temperature.
 This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximu value of the error introduced is 0.8587°C.
 
 ## Flame
-The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the Photodiode on the sensor module. 
+The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the photodiode on the sensor module. 
+The sensor has both an analogic and digital output. It has also an amplifier to amplify the signal according to the potentiometer and a comparator which pulls up the digital output if a flame is detected. It is possible to control the sensitivy by adjusting the potentiometer.
+Since the analog output was already used for the measurement of the temperature, the digital output is used. 
+When it gets high it means that flame is detected and an LED will turn on.
+
+
