@@ -60,8 +60,8 @@ This quantity is related to the temperature through the Steinhart–Hart equatio
 Where A, B and C are the Steinhart-Hart coefficients which vary depending on the type and model of thermistor and the temperature range of interest. In this case:
 
 A = 0.001129148 K^(-1)
-B = 0.000234125 K^(-2)
-C = 0.000000087674 K^(-3)
+B = 0.000234125 K^(-1)
+C = 0.000000087674 K^(-1)
 
 At room temperature the value of the voltage is between 2 and 3 V.
 ### Look-up Table
