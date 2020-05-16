@@ -53,11 +53,11 @@ static int uputc(char,FILE*);
 
 static int uputc(char c,FILE *stream)
 {
-	if (c == '\n')
-		uputc('\r',stream);
-		loop_until_bit_is_set(UCSR0A, UDRE0);	/* wait until we can send a new byte */
-		UDR0 = (uint8_t) c;
-		return 0;
+    if (c == '\n')
+	uputc('\r',stream);
+	loop_until_bit_is_set(UCSR0A, UDRE0);	/* wait until we can send a new byte */
+	UDR0 = (uint8_t) c;
+	return 0;
 }
 
 static FILE mystdout = FDEV_SETUP_STREAM(uputc, NULL,_FDEV_SETUP_WRITE);
@@ -138,17 +138,17 @@ void analog_init(void){
 
 int main(void)
 {
-	stdout=&mystdout;
+	
+  stdout=&mystdout;
 
+  /* uart config */
+  UCSR0A = (1 << U2X0); /* this sets U2X0 to 1 */
+  UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
+  UCSR0C = (3 << UCSZ00); /* this sets UCSZ00 to 3 */
 
-	/* uart config */
-	UCSR0A = (1 << U2X0); /* this sets U2X0 to 1 */
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
-	UCSR0C = (3 << UCSZ00); /* this sets UCSZ00 to 3 */
-
-	/* baudrate setings (variable set by macros) */
-	UBRR0H = (UBRRVAL) >> 8;
-	UBRR0L = UBRRVAL;
+  /* baudrate setings (variable set by macros) */
+  UBRR0H = (UBRRVAL) >> 8;
+  UBRR0L = UBRRVAL;
 
   //SET THE PINS FOR THE DISTANCE
 
@@ -170,14 +170,14 @@ int main(void)
   //Declare the pin sensor as input
   DDRD &= ~(1 << sensorPin);
   PORTD |=(1 << sensorPin);
-	//SET THE PINS FOR THE TEMPERATURE
-	DDRD |= (1 << led_t);
+  //SET THE PINS FOR THE TEMPERATURE
+  DDRD |= (1 << led_t);
 
-	DDRB |= (1 << led_green);
-	n = sizeof(look_upV)/sizeof(look_upV[0]);
+  DDRB |= (1 << led_green);
+  n = sizeof(look_upV)/sizeof(look_upV[0]);
 
-	//RECALL THE FUNCTIONS
-	analog_init();
+  //RECALL THE FUNCTIONS
+  analog_init();
   inter_set_distance();
 
   //Send the first signal for the distance
@@ -185,35 +185,35 @@ int main(void)
   _delay_us(10);
   PORTB &= ~(1 << trigPin);
 
-	while(1) {
+  while(1) {
     //Control for the flame
      if ((PIND & (1<<PD2))){
        puts("Flame!!\n");
        PORTD |= (1 << led_f);
-			 check_f = 0;
+       check_f = 0;
      }
-   else {
-     PORTD &= ~(1 << led_f);
-		 check_f = 1;
+     else {
+       PORTD &= ~(1 << led_f);
+       check_f = 1;
      }
-		 //TEMPERATURE CHECK
-		T =  calc_temp(analogResult);
-		if( T > 40){
-			 puts("Temperature too high!");
-			 PORTD |= (1 << led_t);
-			 chechk_t = 0;
-		 }
-		else {
-			 PORTD &= ~(1 << led_t);
-			 chechk_t = 1;
-			}
+    //TEMPERATURE CHECK
+    T =  calc_temp(analogResult);
+    if( T > 40){
+	puts("Temperature too high!");
+	PORTD |= (1 << led_t);
+	chechk_t = 0;
+     }
+    else {
+        PORTD &= ~(1 << led_t);
+	chechk_t = 1;
+     }
 
 
     //Calculate the distance
      if (flag == 2)
      {
 
-			 speed_sound = 100*(331.45 + (0.62 * T)); //Model for the speed of sound as a function of temperature in cm/s
+       speed_sound = 100*(331.45 + (0.62 * T)); //Model for the speed of sound as a function of temperature in cm/s
 
        dist =(Capt2 - Capt1)*speed_sound/2;
        dist2 = dist/F_CPU;
@@ -221,59 +221,56 @@ int main(void)
        if (dist2 < 10){
          PORTD |= (1 << led_d);
          puts("Too close!\n");
-				 check_d = 0;
-         }
-     else {
+	 check_d = 0;
+        }
+       else {
          PORTD &= ~(1 << led_d);
-				 check_d = 1;
-				 puts("Distance ok!\n");
+	 check_d = 1;
+	 puts("Distance ok!\n");
        }
 
-			 //Control that everything is fine: distance, temperature and flame all in the limits
-			 if( (check_f & check_d & chechk_t)){
-			  PORTB |= (1 << led_green);
-			  puts("EVERYTHING IS FINE!\n");
-			 }
-			 else{
-			 	PORTB  &= ~(1 << led_green);
-			 }
+       //Control that everything is fine: distance, temperature and flame all in the limits
+       if( (check_f & check_d & chechk_t)){
+	  PORTB |= (1 << led_green);
+	  puts("EVERYTHING IS FINE!\n");
+        }
+       else{
+	  PORTB  &= ~(1 << led_green);
+       }
 
-				ADCSRA|=(1<<ADSC);//start next conversion
+       ADCSRA|=(1<<ADSC);//start next conversion
 
        flag = 0; //CLEARING FLAGS
 
        TIMSK1|=(1<<ICIE1); //ENABLING INPUT CAPTURE INTERRUPTS
        TCNT1 = 0; //Clear the counter
 
-			 //Send an input at the end of the loop only if the previous input was received that means that flag == 2
+       //Send an input at the end of the loop only if the previous input was received that means that flag == 2
        PORTB |= (1 << trigPin);
        _delay_us(10);
        PORTB &= ~(1 << trigPin);
        TCNT1=0;
-  	}
+     }
 
-
-
-}
+  }
 }
 
 //Interruption routine for the distance
-  ISR(TIMER1_CAPT_vect)
-{
+ISR(TIMER1_CAPT_vect){
+	
+    //PORTD |= (1 << led);
+    if (flag == 0){
+	 Capt1 = ICR1; //SAVING CAPTURED TIMESTAMP
+	 TCCR1B &=~(1<<ICES1); //CHANGE CAPTURE ON FALLING EDGE
+     }
+    if (flag == 1){
+	    
+	 Capt2 = ICR1; //SAVING CAPTURED TIMESTAMP
+	 TCCR1B|=(1<<ICES1); //CHANGING CAPTURE ON RISING EDGE
 
-	//PORTD |= (1 << led);
-	if (flag == 0){
-	  Capt1 = ICR1; //SAVING CAPTURED TIMESTAMP
-	  TCCR1B &=~(1<<ICES1); //CHANGE CAPTURE ON FALLING EDGE
-	}
-	if (flag == 1){
-
-	  Capt2 = ICR1; //SAVING CAPTURED TIMESTAMP
-	  TCCR1B|=(1<<ICES1); //CHANGING CAPTURE ON RISING EDGE
-
-	  TIFR1 &= ~(1 << ICF1); //Clear the flag
-	}
-	 flag = flag + 1;
+	 TIFR1 &= ~(1 << ICF1); //Clear the flag
+     }
+     flag = flag + 1;
 }
 
 
