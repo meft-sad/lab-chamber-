@@ -21,19 +21,21 @@ Many times in the scientific laboratories there are some inflammable materials w
 ## Distance
 
 The first part of the project consists in measuring the distance of an object/person from the table on which the sample and all the machines are located. In order to do this an ultrasonic sensor HC-SR04 has been used. This sensor emits an ultrasound which travels through the air and if there is an object or obstacle on its path it will bounce back to the source. Considering the travel time and the speed of the sound it is possible to calculate the distance. 
-The HC-SR04 Ultrasonic sensor has 4 pins: Ground, VCC, Trig and Echo. The Ground and the VCC pins of the sensor are connected to the Ground and the 5 volts pins on the Arduino Board respectively. When the trigger pin is high the sensor creates an 8 cycle burst of ultrasound at 40 kHz and when this ultrasonic signal finds an obstacle it is refelected towards the sensor. The echo pin becomes high and stays high for a duration given by the time in which the signal is sent and returns to the sensor and it is proportional to the distance that needs to be measured.
+The HC-SR04 Ultrasonic sensor has 4 pins: Ground, VCC, Trig and Echo. The Ground and the VCC pins of the sensor are connected to the Ground and the 5 volts pins on the Arduino Board respectively. When the trigger pin is high the sensor creates an 8 cycle burst of ultrasound at 40 kHz and when this ultrasonic signal finds an obstacle it is refelected towards the sensor. Once the wave is returned after it getting reflected by any object the Echo pin goes high for a particular amount of time which will be equal to the time taken for the wave to return back to the sensor.
 Therefore, in order to measure the distance between the obstacle and the sensor it is necessary to calculate the time of travel of the signal, that means the time in which the echo stays high. To to do that the Input Caputure mode of the Timer 1 of Arduino UNO has been used. It is a 16-bits timer which incorporate an input capture unit that can capture external events and give them a time-stamp indicating the time of occurrence. When a change of the logic level occurs on the input capture pin, which corresponds to Pin 8 or Arduino (PB0), the 16-bits value of the counter TCNT1 is written inot the ICR1 register. The echo pin is connected to the input capture pin, while the trigger pin can be connected to any I/O pin of Arduino.
 A signal of 10 µs is sent by setting the trigger pin high for this time interval. It is possible to decide which edge on the input capture pin is used to trigger a capture event: initially this set to the rising edge so that when the echo pin becomes high the value of the counter is saved in a variable and afterward it is set to the falling edge so that when the echo pin becomes low the second value of the counter is saved. 
 
 
 
 By making the difference between those two values and divide by the clock frequency, which depends on the crystal inside Arduino and in this case is 16 MHz, it is possible to get the time in which the signal has travel.
-By multiplying for the speed of sound which at 20°C is roughly 343 m/s and dividing by two, since we need to take into account that the signal crosses twice the distance between the obstacle and the sensor, it is possible to get the distance:
+By multiplying for the speed of sound and dividing by two, since we need to take into account that the signal crosses twice the distance between the obstacle and the sensor, it is possible to get the distance:
 
 distance = (time_interval* speed_sound) / 2
 
 It is important to consider that the speed of sound depends on temperature. It is possible to consider the linear model:
+
 speed_sound(T) = (331,45 + (0,62 * T)) m/s
+
 BY calculating the temperature it is possible to calculate the corresponding speed of sound and the corresponding distance.
 In end end when the distance is below a critical value an LED is turned on. 
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
@@ -41,15 +43,15 @@ Le't notice from the code that an initial signal is sent in the setup and then i
 ## Temperature
 ### Sensor 
 In order to measure the temperature of the room an NTC thermistor has been used.
-Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor.
+Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor. NTC thermistor are made by semiconductive materials whose resistance decreases with the temperature: indeed by icreasing the temperature the number of active charge carriers increases and the more charge carriers that are available, the more current a material can conduct.
 
 The operating voltage is 5V and it allows temperature measurements within the range of -55°C and 125°C with an accuracy of ±0.5°C.
 
-The voltage across the thermistor is the analog input that can be measured. From the picture it is possible to notice that the circuit is a voltage divider: 
+The voltage across the thermistor is the analog input that can be measured. Tthe circuit is a voltage divider: 
 
 Vout = Vref R2/(R1+R2)
 
-Where R1 is the known resistance, that in this case is 10kΩ, while R2 is the variable resistance of the thermistor and Vref in this case is 5 V supply voltage. In this way it is possible to find the resistance R2 of the thermistori, knowing the value of the voltage across it.
+Where R1 is the known resistance, that in this case is 10kΩ, while R2 is the variable resistance of the thermistor and Vref in this case is 5 V supply voltage. In this way it is possible to find the resistance R2 of the thermistor, knowing the value of the voltage across it.
 
 R2 = R1(Vref/Vout-1)
 
