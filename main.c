@@ -226,7 +226,6 @@ int main(void)
        else {
          PORTD &= ~(1 << led_d);
 	 check_d = 1;
-	 puts("Distance ok!\n");
        }
 
        //Control that everything is fine: distance, temperature and flame all in the limits
