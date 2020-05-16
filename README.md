@@ -71,7 +71,7 @@ This has as advantage to reduce the computational cost of the calculation of the
 
 ## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the photodiode on the sensor module. 
-The sensor has both an analogic and digital output. It has also an amplifier to amplify the signal according to the potentiometer and a comparator which pulls up the digital output if a flame is detected. It is possible to control the sensitivy by adjusting the potentiometer.
+The sensor has both an analogic and digital output. It consists of a 5mm infra-red receiver LED, a LM393 dual differential comparator a 3296W trimmer potentiometer, six resistors and two indicator LEDs. The photodiode detects light in the range 760 nm to 1100 nm, which corresponds to the range of wavelength of the radiation emitted by flames. The amplifier amplifies the signal according to the resistant value of the potentiometer and send it to a comparator which pulls up the digital output if a flame is detected. It is possible to control the sensitivy by adjusting the potentiometer.
 Since the analog output was already used for the measurement of the temperature, the digital output is used. 
 When it gets high it means that flame is detected and an LED will turn on.
 
