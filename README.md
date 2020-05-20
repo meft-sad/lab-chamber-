@@ -92,6 +92,6 @@ When it gets high it means that flame is detected and an LED will turn on.
 
 ### False alarms
 
-The wavelength detected by the photodiode is the one emitted by flames, but can be due to the presence of other sources, such as the human body. 
+The wavelength detected by the photodiode is the one emitted by flames, but can be due to the presence of other sources, such as the human body or some machines in the same room. For this reason it can happen that the due to the enviroment the sensor will send a false alarm. 
 
 
