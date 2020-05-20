@@ -49,6 +49,8 @@ The operating voltage is 5V and it allows temperature measurements within the ra
 
 The voltage across the thermistor is the analog input that can be measured. Tthe circuit is a voltage divider: 
 
+![](images_git/thermistor.JPG)
+
 Vout = Vref R2/(R1+R2)
 
 Where R1 is the known resistance, that in this case is 10kΩ, while R2 is the variable resistance of the thermistor and Vref in this case is 5 V supply voltage. In this way it is possible to find the resistance R2 of the thermistor, knowing the value of the voltage across it.
