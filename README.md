@@ -75,11 +75,23 @@ This has as advantage to reduce the computational cost of the calculation of the
 
 ## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the photodiode on the sensor module. 
-The sensor has both an analogic and digital output. It consists of a 5mm infra-red receiver LED, a LM393 dual differential comparator a 3296W trimmer potentiometer, six resistors and two indicator LEDs. The photodiode detects light in the range 760 nm to 1100 nm, which corresponds to the range of wavelength of the radiation emitted by flames. The amplifier amplifies the signal according to the resistant value of the potentiometer and send it to a comparator which pulls up the digital output if a flame is detected. It is possible to control the sensitivy by adjusting the potentiometer.
+The sensor has both an analogic and digital output. It consists of a 5mm infra-red receiver LED, a LM393 dual differential comparator a 3296W trimmer potentiometer, resistors and two indicator LEDs.
+The schematic is shown in figure.
 
 ![](images_git/circuit_flame.JPG)
 
+The photodiode detects light in the range 760 nm to 1100 nm, which corresponds to the range of wavelength of the radiation emitted by flames. The photodiode is made by a transistor: light striking the semiconductor frees electrons and holes and causes current to flow in the base region.
+According to the intensity of the light a different current will flow and a different voltage will correspond to the node indicated by A0 in the figure and it is also the analog output of the sensor and the input- on the comparator LM393. The second input is the voltage given by the potentiometer: it is a three-terminal resistor (Rs in figure) with a sliding contact that forms an adjustable voltage divider. The comparator consists in an amplifier where the two inputs are the one described and the output is the digital pin of the flame sensor.
+
+![](images_git/ampl_schem.JPG)
+
+
+It is possible to control the sensitivy by adjusting the potentiometer and so changing the reference voltage of the comparator.
 Since the analog output was already used for the measurement of the temperature, the digital output is used. 
 When it gets high it means that flame is detected and an LED will turn on.
+
+### False alarms
+
+The wavelength detected by the photodiode is the one emitted by flames, but can be due to the presence of other sources, such as the human body. 
 
 
