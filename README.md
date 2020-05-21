@@ -52,7 +52,7 @@ In particular this introduces an error in the calculation of temperature.
 This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximum value of the error introduced is 0.8587°C.
 The plots of the temperature calculated by means of lookup tables and linear interpolation and the temperature calculated by means of Steinhart–Hart equation, as functions of the voltage, are shown in figure.
 
-![]plotT-V.jpg
+![](images_git/plotT-V.jpg)
 
 It is possible to notice that for room temperature the two curves are well superposed, only at higher temperatures the difference is more visible.
 ## Distance
