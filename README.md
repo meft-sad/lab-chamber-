@@ -36,6 +36,8 @@ Arduino UNO
 In order to measure the temperature of the room an NTC thermistor has been used.
 Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor. NTC thermistor are made by semiconductive materials whose resistance decreases with the temperature: indeed by icreasing the temperature the number of active charge carriers increases and the more charge carriers that are available, the more current a material can conduct.
 
+![](images_git/NTC6k8-R-T(0-50C).png)
+
 The operating voltage is 5V and it allows temperature measurements within the range of -55°C and 125°C with an accuracy of ±0.5°C.
 
 The voltage across the thermistor is the analog input that can be measured. The circuit is a voltage divider: 
