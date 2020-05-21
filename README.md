@@ -117,7 +117,6 @@ The wavelength detected by the photodiode is the one emitted by flames, but can 
 
 ## Alarm message
 
-This kind of device could be used inside a laboratory, if for example you leave the room for some time and you want to know if during your absence something went wrong it is not enough simply to turn on
-
-
+This kind of device could be used inside a laboratory and if for example you leave the room for some time you want to know if during your absence something went wrong. In order to do this it is not enough to make the red LEDs turn on if something is wrong in the current moment and the green LED if not because in this way it is not possible to keep track of what happened during your absence. In order to do this a button is used: the green LED can turn on only if the button is pressed and everything is fine (normal temperature, not flames detected and nothing too close to the table), but when something goes wrong it turns off and it cannot turn on if the button 
+is not pressed again.Therefore if before leaving the room everything was fine and the LED was on and when you come back in the laboratory the green LED is off, it means that during your absence something went wrong. if pressing the button the LED turns on again it means that the problem now is solved, if not it means that there is still something undesired.
 
