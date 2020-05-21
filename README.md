@@ -50,7 +50,11 @@ At room temperature the value of the voltage is between 2 and 3 V.
 Since Arduino, for complicated operations like logarithms, is not very efficient, instead of calculating the temperature using the Steinhart–Hart equation, the temperature is calculated using look-up tables. In particular a finite number of values of the voltage are stored in an array and the corresponding values of temperature are calculated outside Arduino (in Matlab) and an array for those values of temperature is created. In order to find the other values of temperature a linear interpolation is performed. 
 In particular this introduces an error in the calculation of temperature. 
 This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximum value of the error introduced is 0.8587°C.
+The plots of the temperature calculated by means of lookup tables and linear interpolation and the temperature calculated by means of Steinhart–Hart equation, as functions of the voltage, are shown in figure.
 
+![]plotT-V.jpg
+
+It is possible to notice that for room temperature the two curves are well superposed, only at higher temperatures the difference is more visible.
 ## Distance
 
 The first part of the project consists in measuring the distance of an object/person from the table on which the sample and all the machines are located. In order to do this an ultrasonic sensor HC-SR04 has been used. This sensor emits an ultrasound which travels through the air and if there is an object or obstacle on its path it will bounce back to the source. Considering the travel time and the speed of the sound it is possible to calculate the distance. 
