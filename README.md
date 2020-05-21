@@ -15,6 +15,11 @@ Many times in the scientific laboratories there are some inflammable materials w
 ## Components used
 ## Board
 Arduino UNO
+## Outputs
+
+3 red LEDs
+
+1 green LED
 ## Inputs
 
 1 button
@@ -24,11 +29,7 @@ Arduino UNO
 1) HC-SR04 ultrasonic sensor: https://www.electroschematics.com/wp-content/uploads/2013/07/HCSR04-datasheet-version-1.pdf
 2) KY-013 temperature sensor: https://datasheetspdf.com/pdf-file/1402026/Joy-IT/KY-013/1
 3) KY-026 flame sensor: https://datasheet4u.com/datasheet-parts/KY-026-datasheet.php?id=1402037
-## Outputs
 
-3 red LEDs
-
-1 green LED
 
 ## Temperature
 ### Sensor 
