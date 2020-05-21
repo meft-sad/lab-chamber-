@@ -6,9 +6,9 @@
 ## Introduction
 This project consists in the realization of a set of controls that can be implemented in a laboratory chamber before a scientific experiment and it is realized using Arduino UNO and some sensors.
 
-During an experiment it can be very important that the support on which the sample and the machines are located, like a table of the lab, is very stable, or for example that nobody is too close to the table because of safety reasons, both of the people and the sample. For this reason a sonar sensor is used in order to measure the distance from sample and if this distance is too small a red LED turns on. 
+Sometimes it can be very important that the temperature inside the laboratory is within a specific range because of the sample that is under analysis. For this reason a temperature sensor is used in order to control that the temperature is compatible with the requests. In case it is not, an LED will turn on.
 
-Sometimes it can also be very important that the temperature inside the laboratory is within a specific range because of the sample that is under analysis. For this reason a temperature sensor is used in order to control that the temperature is compatible with the requests. In case it is not, an LED will turn on.
+During an experiment it can also be very important that the support on which the sample and the machines are located, like a table of the lab, is very stable, or for example that nobody is too close to the table because of safety reasons, both of the people and the sample. For this reason a sonar sensor is used in order to measure the distance from sample and if this distance is too small a red LED turns on. 
 
 Many times in the scientific laboratories there are some inflammable materials which can be very dangerous. It is very important that the laboratory is safe, for this reason a flame sensor will be used to detect the possible presence of a flames. 
 
