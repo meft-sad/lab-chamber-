@@ -94,8 +94,9 @@ Le't notice from the code that an initial signal is sent in the setup and then i
 
 
 ## Flame
+### Sensor
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the photodiode on the sensor module. 
-The sensor has both an analogic and digital output. It consists of a 5mm infra-red receiver LED, a LM393 dual differential comparator a 3296W trimmer potentiometer, resistors and capacitors and two indicator LEDs.
+The sensor has both an analogic and digital output. It consists of a 5mm infra-red receiver LED, a LM393 dual differential comparator a 3296W trimmer potentiometer, resistors and capacitors and two indicator LEDs, one is on when the sensor is well connected and the second is on if flames are detected.
 The schematic is shown in figure.
 
 ![](images_git/circuit_flame.JPG)
