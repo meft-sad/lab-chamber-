@@ -18,6 +18,39 @@ Many times in the scientific laboratories there are some inflammable materials w
 2) KY-013 temperature sensor: https://datasheetspdf.com/pdf-file/1402026/Joy-IT/KY-013/1
 3) KY-026 flame sensor: https://datasheet4u.com/datasheet-parts/KY-026-datasheet.php?id=1402037
 
+## Temperature
+### Sensor 
+In order to measure the temperature of the room an NTC thermistor has been used.
+Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor. NTC thermistor are made by semiconductive materials whose resistance decreases with the temperature: indeed by icreasing the temperature the number of active charge carriers increases and the more charge carriers that are available, the more current a material can conduct.
+
+The operating voltage is 5V and it allows temperature measurements within the range of -55°C and 125°C with an accuracy of ±0.5°C.
+
+The voltage across the thermistor is the analog input that can be measured. The circuit is a voltage divider: 
+
+![](images_git/thermistor.JPG)
+
+Vout = Vref R2/(R1+R2)
+
+Where R1 is the known resistance, that in this case is 10kΩ, while R2 is the variable resistance of the thermistor and Vref in this case is 5 V supply voltage. In this way it is possible to find the resistance R2 of the thermistor, knowing the value of the voltage across it.
+
+R2 = R1(Vref/Vout-1)
+
+This quantity is related to the temperature through the Steinhart–Hart equation:
+
+1/T = A + B lnR + C (lnR)^3
+It is an empirical expresion with T expressed in Kelvin and R in Ohm. A, B and C are the Steinhart-Hart coefficients which vary depending on the type and model of thermistor and the temperature range of interest. In this case:
+
+A = 0.001129148 
+B = 0.000234125
+C = 0.000000087674 
+
+At room temperature the value of the voltage is between 2 and 3 V.
+
+### Look-up Table
+Since Arduino, for complicated operations like logarithms, is not very efficient, instead of calculating the temperature using the Steinhart–Hart equation, the temperature is calculated using look-up tables. In particular a finite number of values of the voltage are stored in an array and the corresponding values of temperature are calculated outside Arduino (in Matlab) and an array for those values of temperature is created. In order to find the other values of temperature a linear interpolation is performed. 
+In particular this introduces an error in the calculation of temperature. 
+This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximum value of the error introduced is 0.8587°C.
+
 ## Distance
 
 The first part of the project consists in measuring the distance of an object/person from the table on which the sample and all the machines are located. In order to do this an ultrasonic sensor HC-SR04 has been used. This sensor emits an ultrasound which travels through the air and if there is an object or obstacle on its path it will bounce back to the source. Considering the travel time and the speed of the sound it is possible to calculate the distance. 
@@ -40,38 +73,7 @@ BY calculating the temperature it is possible to calculate the corresponding spe
 In end end when the distance is below a critical value an LED is turned on. 
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
-## Temperature
-### Sensor 
-In order to measure the temperature of the room an NTC thermistor has been used.
-Thermistors are variable resistors that change their resistance with temperature. In particular the sensor used is called KY-013 which consists of a NTC thermistor and a 10 kΩ resistor. NTC thermistor are made by semiconductive materials whose resistance decreases with the temperature: indeed by icreasing the temperature the number of active charge carriers increases and the more charge carriers that are available, the more current a material can conduct.
 
-The operating voltage is 5V and it allows temperature measurements within the range of -55°C and 125°C with an accuracy of ±0.5°C.
-
-The voltage across the thermistor is the analog input that can be measured. Tthe circuit is a voltage divider: 
-
-![](images_git/thermistor.JPG)
-
-Vout = Vref R2/(R1+R2)
-
-Where R1 is the known resistance, that in this case is 10kΩ, while R2 is the variable resistance of the thermistor and Vref in this case is 5 V supply voltage. In this way it is possible to find the resistance R2 of the thermistor, knowing the value of the voltage across it.
-
-R2 = R1(Vref/Vout-1)
-
-This quantity is related to the temperature through the Steinhart–Hart equation:
-
-1/T = A + B lnR + C (lnR)^3
-
-Where A, B and C are the Steinhart-Hart coefficients which vary depending on the type and model of thermistor and the temperature range of interest. In this case:
-
-A = 0.001129148 K^(-1)
-B = 0.000234125 K^(-1)
-C = 0.000000087674 K^(-1)
-
-At room temperature the value of the voltage is between 2 and 3 V.
-### Look-up Table
-Since Arduino, for complicated operations like logarithms, is not very efficient, instead of calculating the temperature using the Steinhart–Hart equation, the temperature is calculated using look-up tables. In particular a finite number of values of the voltage are stored in an array and the corresponding values of temperature are calculated outside Arduino (in Matlab) and an array for those values of temperature is created. In order to find the other values of temperature a linear interpolation is performed. 
-In particular this introduces an error in the calculation of temperature. 
-This has as advantage to reduce the computational cost of the calculation of the temperature but it introduces an error. The maximu value of the error introduced is 0.8587°C.
 
 ## Flame
 The sensor KY-026 is used. It is principally composed by an Infra-red sensor: when fire burns it emits a small amount of infra-red light, this light will be received by the photodiode on the sensor module. 
@@ -93,5 +95,10 @@ When it gets high it means that flame is detected and an LED will turn on.
 ### False alarms
 
 The wavelength detected by the photodiode is the one emitted by flames, but can be due to the presence of other sources, such as the human body or some machines in the same room. For this reason it can happen that the due to the enviroment the sensor will send a false alarm. 
+
+## Alarm message
+
+This kind of device could be used inside a laboratory, if for example you leave the room for some time and you want to know if during your absence something went wrong it is not enough simply to turn on
+
 
 
