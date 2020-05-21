@@ -43,6 +43,14 @@ const int led_t = PD6;
 
 //LED THAT CONTROLS THAT TURNS ON IF ALL THE CONTROLS ARE OK
 const int led_green = PB2;
+
+//Button variables: if the button was pressed and everything was ok the status becomes 1
+//If something went wrong (flame detected or temperature too high or something too close) the status turns 0 
+//and the greeen led cannot become high again even if everything is ok if the button is not pressed again. 
+
+const int button = PB4;
+volatile int status = 0;
+
 //Checks variables
 volatile int check_d = 0;
 volatile int check_f = 0;
@@ -173,7 +181,13 @@ int main(void)
   //SET THE PINS FOR THE TEMPERATURE
   DDRD |= (1 << led_t);
 
+  //Green LED as output
   DDRB |= (1 << led_green);
+
+  //Button pin as input
+  DDRB &= ~(1 << button);
+  PORTB |=(1 << button);
+	
   n = sizeof(look_upV)/sizeof(look_upV[0]);
 
   //RECALL THE FUNCTIONS
@@ -228,14 +242,25 @@ int main(void)
 	 check_d = 1;
        }
 
-       //Control that everything is fine: distance, temperature and flame all in the limits
-       if( (check_f & check_d & chechk_t)){
+	     
+
+       //Control if the button was pressed
+       if(!(PINB & (1 << button))){
+	  status = 1;
+       }
+       
+       //Control that everything is fine: distance, temperature and flame all in the limits and the button was pressed so that status is 1
+       if((check_f & check_d & chechk_t) & status){
 	  PORTB |= (1 << led_green);
 	  puts("EVERYTHING IS FINE!\n");
-        }
+	}
        else{
+	  //Here something went wrong so the led turns off and the status is set to 0. 
+	  //In this way when everything is ok again the led cannot turn on if before the button is not pressed.
+	  status = 0;
 	  PORTB  &= ~(1 << led_green);
-       }
+        }
+
 
        ADCSRA|=(1<<ADSC);//start next conversion
 
