@@ -12,11 +12,19 @@ Sometimes it can also be very important that the temperature inside the laborato
 
 Many times in the scientific laboratories there are some inflammable materials which can be very dangerous. It is very important that the laboratory is safe, for this reason a flame sensor will be used to detect the possible presence of a flames. 
 
-## Sensors:
-
+## Components used
+## Board
+Arduino UNO
+## Inputs
+1 button
+3 sensors
+### Sensors
 1) HC-SR04 ultrasonic sensor: https://www.electroschematics.com/wp-content/uploads/2013/07/HCSR04-datasheet-version-1.pdf
 2) KY-013 temperature sensor: https://datasheetspdf.com/pdf-file/1402026/Joy-IT/KY-013/1
 3) KY-026 flame sensor: https://datasheet4u.com/datasheet-parts/KY-026-datasheet.php?id=1402037
+## Outputs
+3 red LEDs
+1 green LED
 
 ## Temperature
 ### Sensor 
