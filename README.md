@@ -113,10 +113,7 @@ According to the intensity of the light a different current will flow and a diff
 It is possible to control the sensitivy by adjusting the potentiometer and so changing the reference voltage of the comparator.
 Since the analog output was already used for the measurement of the temperature, the digital output is used. 
 When it gets high it means that flame is detected and an LED will turn on.
-
-### False alarms
-
-The wavelength detected by the photodiode is the one emitted by flames, but can be due to the presence of other sources, such as the human body or some machines in the same room. For this reason it can happen that the due to the enviroment the sensor will send a false alarm. 
+ 
 
 ## Alarm message
 
