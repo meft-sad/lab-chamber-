@@ -53,6 +53,7 @@ R2 = R1(Vref/Vout-1)
 This quantity is related to the temperature through the Steinhart–Hart equation:
 
 1/T = A + B lnR + C (lnR)^3
+
 It is an empirical expresion with T expressed in Kelvin and R in Ohm. A, B and C are the Steinhart-Hart coefficients which vary depending on the type and model of thermistor and the temperature range of interest. In this case:
 
 A = 0.001129148 
