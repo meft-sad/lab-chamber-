@@ -93,7 +93,7 @@ It is important to consider that the speed of sound depends on temperature. It i
 speed_sound(T) = (331,45 + (0,62 * T)) m/s
 
 BY calculating the temperature it is possible to calculate the corresponding speed of sound and the corresponding distance.
-In end end when the distance is below a critical value an LED is turned on. 
+In the end when the distance is below a critical value an LED is turned on. 
 Le't notice from the code that an initial signal is sent in the setup and then it is sent again only when the prevoius one is recevied and the corresponding distance has been calculated. In this way it is possible to avoid the superposition of two signals. 
 
 
